@@ -147,7 +147,7 @@ img {
   overflow: hidden;
 }
 
-.hero-animated #heroCanvas {
+.hero-animated .hero-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
