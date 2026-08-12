@@ -1,0 +1,29 @@
+[
+  {
+    "id": "t1",
+    "name": "Dr. M. Khuram Shahzad",
+    "role": "Principal Investigator",
+    "photo": "assets/images/placeholder-person.jpg",
+    "bio": "Placeholder bio.",
+    "email": "khuram.shahzad@seecs.nust.edu.pk",
+    "linkedin": ""
+  },
+  {
+    "id": "t2",
+    "name": "Abdul Quyyum",
+    "role": "Research Intern",
+    "photo": "assets/images/placeholder-person.jpg",
+    "bio": "Placeholder bio.",
+    "email": "",
+    "linkedin": ""
+  },
+  {
+    "id": "t3",
+    "name": "Placeholder Name",
+    "role": "Research Intern",
+    "photo": "assets/images/placeholder-person.jpg",
+    "bio": "Placeholder bio.",
+    "email": "",
+    "linkedin": ""
+  }
+]

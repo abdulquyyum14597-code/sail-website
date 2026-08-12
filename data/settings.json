@@ -1,0 +1,19 @@
+{
+  "labName": "SAIL — Smart AI Lab",
+  "fullName": "Software Analysis & Intelligence Lab",
+  "affiliation": "SEECS, National University of Sciences & Technology (NUST)",
+  "tagline": "Advancing intelligent systems through applied AI research.",
+  "mission": "Lorem ipsum dolor sit amet — placeholder mission statement. The lab conducts research across machine learning, software intelligence, and applied AI to solve real-world problems.",
+  "principalInvestigator": {
+    "name": "Dr. M. Khuram Shahzad",
+    "title": "Principal Investigator",
+    "photo": "assets/images/pi-placeholder.jpg",
+    "bio": "Placeholder biography for the Principal Investigator. Replace with real bio, research interests, and credentials.",
+    "email": "khuram.shahzad@seecs.nust.edu.pk"
+  },
+  "contact": {
+    "address": "SEECS, NUST H-12 Campus, Islamabad, Pakistan",
+    "email": "sail@seecs.nust.edu.pk",
+    "phone": "+92 51 0000000"
+  }
+}

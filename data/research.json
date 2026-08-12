@@ -1,0 +1,20 @@
+[
+  {
+    "id": "r1",
+    "title": "Machine Learning",
+    "description": "Placeholder description of machine learning research focus within the lab.",
+    "icon": "🤖"
+  },
+  {
+    "id": "r2",
+    "title": "Software Intelligence",
+    "description": "Placeholder description of software analysis and intelligence research.",
+    "icon": "🧠"
+  },
+  {
+    "id": "r3",
+    "title": "Applied AI Systems",
+    "description": "Placeholder description of applied AI systems research.",
+    "icon": "⚙️"
+  }
+]

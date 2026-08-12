@@ -1,0 +1,12 @@
+[
+  {
+    "id": "g1",
+    "image": "assets/images/placeholder-lab.jpg",
+    "caption": "Lab placeholder photo 1"
+  },
+  {
+    "id": "g2",
+    "image": "assets/images/placeholder-lab.jpg",
+    "caption": "Lab placeholder photo 2"
+  }
+]
