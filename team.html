@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team — SAIL Smart AI Lab</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="team">
+
+  <div data-include="header"></div>
+
+  <section class="hero" style="padding:60px 24px;">
+    <h1>Our Team</h1>
+    <p>Meet the researchers, interns, and members of the lab.</p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card-grid" id="teamGrid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+        <p class="loading-text">Loading team...</p>
+      </div>
+    </div>
+  </section>
+
+  <div data-include="footer"></div>
+
+  <script src="js/include.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/team.js"></script>
+</body>
+</html>

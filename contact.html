@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — SAIL Smart AI Lab</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="contact">
+
+  <div data-include="header"></div>
+
+  <section class="hero" style="padding:60px 24px;">
+    <h1>Contact Us</h1>
+    <p>Get in touch with the lab.</p>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:900px;display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+      <div>
+        <h2 class="section-title" style="text-align:left;">Reach Out</h2>
+        <p id="contactAddress" style="color:var(--color-muted);margin-bottom:10px;">Loading...</p>
+        <p id="contactEmail" style="color:var(--color-muted);margin-bottom:10px;"></p>
+        <p id="contactPhone" style="color:var(--color-muted);"></p>
+      </div>
+      <div>
+        <h2 class="section-title" style="text-align:left;">Send a Message</h2>
+        <form id="contactForm">
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:6px;">Name</label>
+            <input type="text" id="cfName" required style="width:100%;padding:10px 12px;border:1px solid var(--color-border);border-radius:8px;" />
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:6px;">Email</label>
+            <input type="email" id="cfEmail" required style="width:100%;padding:10px 12px;border:1px solid var(--color-border);border-radius:8px;" />
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:6px;">Message</label>
+            <textarea id="cfMessage" rows="5" required style="width:100%;padding:10px 12px;border:1px solid var(--color-border);border-radius:8px;font-family:inherit;"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <p id="cfStatus" style="margin-top:12px;color:var(--color-teal);display:none;">Message sent (placeholder — no backend yet).</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div data-include="footer"></div>
+
+  <script src="js/include.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>
