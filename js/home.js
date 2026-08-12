@@ -34,9 +34,9 @@ async function loadResearchPreview() {
       container.innerHTML = `<p class="empty-text">No research areas added yet.</p>`;
       return;
     }
-    container.innerHTML = areas.map(area => `
-      <div class="card">
-        <div class="icon">${area.icon || '🔬'}</div>
+    window.cachedResearchPreview = areas;
+    container.innerHTML = areas.map((area, i) => `
+      <div class="card" style="cursor:pointer;" onclick="showHomeResearchModal(${i})">
         <h3>${area.title}</h3>
         <p style="color:var(--color-muted);margin-top:8px;">${area.description}</p>
       </div>
@@ -54,14 +54,36 @@ async function loadPublicationsPreview() {
       container.innerHTML = `<p class="empty-text">No publications added yet.</p>`;
       return;
     }
-    container.innerHTML = pubs.slice(0, 3).map(pub => `
-      <div class="pub-item">
+    window.cachedPubPreview = pubs.slice(0, 3);
+    container.innerHTML = window.cachedPubPreview.map((pub, i) => `
+      <div class="pub-item" style="cursor:pointer;" onclick="showHomePubModal(${i})">
         <h4>${pub.title}</h4>
-        <p class="meta">${pub.authors} — ${pub.venue}, ${pub.year}</p>
-        <a href="${pub.link}" target="_blank" rel="noopener">View Publication →</a>
+        <p class="meta">${pub.authors} &mdash; ${pub.venue}, ${pub.year}</p>
       </div>
     `).join('');
   } catch (err) {
     container.innerHTML = `<p class="empty-text">Failed to load publications.</p>`;
   }
 }
+
+window.showHomeResearchModal = function(index) {
+  const area = window.cachedResearchPreview[index];
+  if(!area) return;
+  const html = `
+    <h3 style="margin-bottom:16px;">${area.title}</h3>
+    <p style="font-size:1.05rem; opacity:0.9; margin-bottom:24px;">${area.description}</p>
+  `;
+  window.openPublicModal(html);
+};
+
+window.showHomePubModal = function(index) {
+  const pub = window.cachedPubPreview[index];
+  if(!pub) return;
+  const html = `
+    <h3 style="margin-bottom:12px;">${pub.title}</h3>
+    <p style="margin-bottom:10px;"><strong>Authors:</strong> ${pub.authors}</p>
+    <p style="margin-bottom:20px;"><strong>Venue:</strong> ${pub.venue} (${pub.year})</p>
+    ${pub.link && pub.link !== '#' ? `<a href="${pub.link}" target="_blank" rel="noopener" class="btn btn-primary" style="text-decoration:none;">View Full Publication &rarr;</a>` : ''}
+  `;
+  window.openPublicModal(html);
+};

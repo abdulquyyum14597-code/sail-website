@@ -7,3 +7,11 @@
     </p>
   </div>
 </footer>
+
+<!-- Public Shared Modal System -->
+<div class="modal-overlay" id="publicModal" onclick="if(event.target===this) closePublicModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePublicModal()" aria-label="Close modal">&times;</button>
+    <div id="publicModalContent"></div>
+  </div>
+</div>

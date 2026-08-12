@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Team — SAIL Admin</title>
   <link rel="stylesheet" href="css/admin.css" />
+<script src="../js/theme.js"></script>
 </head>
 <body data-page="team">
   <div class="admin-layout">
@@ -40,11 +41,11 @@
       <form id="teamForm">
         <input type="hidden" id="tId" />
         <div class="field">
-          <label>Full Name</label>
+          <label>Full Name <span class="required">*</span></label>
           <input type="text" id="tName" required />
         </div>
         <div class="field">
-          <label>Role (e.g. Principal Investigator, Research Intern)</label>
+          <label>Role <span class="required">*</span></label>
           <input type="text" id="tRole" required />
         </div>
         <div class="field">

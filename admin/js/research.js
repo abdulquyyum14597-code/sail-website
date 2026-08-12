@@ -13,7 +13,6 @@ async function renderTable() {
 
   tbody.innerHTML = items.map(r => `
     <tr>
-      <td style="font-size:1.3rem;">${r.icon || '🔬'}</td>
       <td>${r.title}</td>
       <td>${r.description}</td>
       <td class="row-actions">
@@ -36,7 +35,6 @@ function openEditModal(r) {
   document.getElementById('rId').value = r.id;
   document.getElementById('rTitle').value = r.title;
   document.getElementById('rDescription').value = r.description;
-  document.getElementById('rIcon').value = r.icon || '';
   document.getElementById('modalOverlay').classList.add('open');
 }
 
@@ -50,7 +48,6 @@ document.getElementById('researchForm').addEventListener('submit', async (e) => 
   const data = {
     title: document.getElementById('rTitle').value,
     description: document.getElementById('rDescription').value,
-    icon: document.getElementById('rIcon').value || '🔬',
   };
 
   if (id) {

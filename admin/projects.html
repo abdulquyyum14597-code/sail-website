@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — SAIL Admin</title>
+  <link rel="stylesheet" href="css/admin.css" />
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="projects">
+  <div class="admin-layout">
+    <div data-include="sidebar"></div>
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Projects</h1>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-secondary" onclick="exportCollection('projects')">Export JSON</button>
+          <button class="btn btn-primary" onclick="openAddModal()">+ Add Project</button>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Tech Stack</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="projTableBody">
+          <tr><td colspan="5">Loading...</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <h2 id="modalTitle">Add Project</h2>
+      <form id="projForm">
+        <input type="hidden" id="projId" />
+        <div class="field">
+          <label>Title <span class="required">*</span></label>
+          <input type="text" id="projTitle" required />
+        </div>
+        <div class="field">
+          <label>Short Description <span class="required">*</span></label>
+          <textarea id="projDesc" rows="2" required></textarea>
+        </div>
+        <div class="field">
+          <label>Full Details</label>
+          <textarea id="projDetails" rows="4"></textarea>
+        </div>
+        <div class="field">
+          <label>Status (e.g. Active, Completed)</label>
+          <input type="text" id="projStatus" />
+        </div>
+        <div class="field">
+          <label>Tech Stack / Tools</label>
+          <input type="text" id="projTech" placeholder="e.g. Python, TensorFlow, React" />
+        </div>
+        <div class="field">
+          <label>Start/End Date (Optional)</label>
+          <input type="text" id="projDates" placeholder="e.g. Jan 2024 - Present" />
+        </div>
+        <div class="field">
+          <label>Team / Researchers (Optional)</label>
+          <input type="text" id="projTeam" />
+        </div>
+        <div class="field">
+          <label>Code Repository URL</label>
+          <input type="text" id="projCode" placeholder="https://github.com/..." />
+        </div>
+        <div class="field">
+          <label>Demo / Project URL</label>
+          <input type="text" id="projDemo" placeholder="https://..." />
+        </div>
+        <div class="field">
+          <label>Related Publication URL (Optional)</label>
+          <input type="text" id="projPub" placeholder="https://..." />
+        </div>
+        <div class="field">
+          <label>Thumbnail Image PATH/URL</label>
+          <input type="text" id="projImage" placeholder="assets/images/project-placeholder.jpg" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/include.js"></script>
+  <script src="js/projects.js"></script>
+</body>
+</html>

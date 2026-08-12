@@ -5,8 +5,19 @@
     <a href="team.html" data-nav="team">Team / Interns</a>
     <a href="publications.html" data-nav="publications">Publications</a>
     <a href="research.html" data-nav="research">Research Areas</a>
+    <a href="projects.html" data-nav="projects">Projects</a>
     <a href="gallery.html" data-nav="gallery">Gallery</a>
     <a href="settings.html" data-nav="settings">Lab Settings</a>
   </nav>
+  <div style="padding: 12px 24px; margin-top: 10px;">
+    <select onchange="setTheme(this.value)" id="themeSelectAdmin" style="width:100%; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.1); color:#fff; border-radius:4px; padding:6px; cursor:pointer; font-size:0.85rem;">
+      <option value="original" style="background:#fff; color:#000;">Original Theme</option>
+      <option value="light" style="background:#fff; color:#000;">Light Theme</option>
+      <option value="dark" style="background:#fff; color:#000;">Dark Theme</option>
+    </select>
+    <script>
+      if(localStorage.getItem('sail_theme')) document.getElementById('themeSelectAdmin').value = localStorage.getItem('sail_theme');
+    </script>
+  </div>
   <div class="logout" onclick="logout()">Log Out</div>
 </aside>

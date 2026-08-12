@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery — SAIL Admin</title>
   <link rel="stylesheet" href="css/admin.css" />
+<script src="../js/theme.js"></script>
 </head>
 <body data-page="gallery">
   <div class="admin-layout">
@@ -39,7 +40,7 @@
       <form id="galleryForm">
         <input type="hidden" id="gId" />
         <div class="field">
-          <label>Image URL / Path</label>
+          <label>Image URL / Path <span class="required">*</span></label>
           <input type="text" id="gImage" placeholder="assets/images/placeholder-lab.jpg" required />
         </div>
         <div class="field">

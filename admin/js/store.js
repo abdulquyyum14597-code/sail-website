@@ -17,7 +17,7 @@
    calls — keep them the same so nothing else has to change.
    ============================================================ */
 
-const COLLECTIONS = ['team', 'publications', 'research', 'gallery'];
+const COLLECTIONS = ['team', 'publications', 'research', 'gallery', 'projects'];
 
 async function seedIfEmpty(collection) {
   const existing = localStorage.getItem(`sail_${collection}`);

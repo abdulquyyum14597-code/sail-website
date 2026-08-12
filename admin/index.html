@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard — SAIL Admin</title>
   <link rel="stylesheet" href="css/admin.css" />
+<script src="../js/theme.js"></script>
 </head>
 <body data-page="dashboard">
   <div class="admin-layout">
@@ -14,31 +15,92 @@
       <div class="notice-banner">
         This admin panel currently saves changes in your browser (no live backend yet). Use the "Export JSON" button on each page after editing, then send the file to your backend developer or replace it in <code>/data/</code>.
       </div>
-      <div class="card-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
-        <a href="team.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
-          <h3 style="color:var(--color-navy);">Team / Interns</h3>
-          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Add, edit, or remove team members.</p>
+
+      <!-- Live Stats -->
+      <div class="dash-stats" id="dashStats">
+        <div class="stat-card">
+          <span class="stat-count" id="statTeam">—</span>
+          <span class="stat-label">Team Members</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-count" id="statPubs">—</span>
+          <span class="stat-label">Publications</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-count" id="statResearch">—</span>
+          <span class="stat-label">Research Areas</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-count" id="statProjects">—</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-count" id="statGallery">—</span>
+          <span class="stat-label">Gallery Photos</span>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <h3 style="margin:28px 0 14px; color:var(--color-navy); font-size:1.05rem;">Quick Actions</h3>
+      <div class="dash-quick-links">
+        <a href="team.html" class="quick-link">+ Add Team Member</a>
+        <a href="publications.html" class="quick-link">+ Add Publication</a>
+        <a href="projects.html" class="quick-link">+ Add Project</a>
+        <a href="gallery.html" class="quick-link">+ Add Gallery Photo</a>
+      </div>
+
+      <!-- Section Links -->
+      <h3 style="margin:28px 0 14px; color:var(--color-navy); font-size:1.05rem;">Manage Sections</h3>
+      <div class="dash-grid">
+        <a href="team.html" class="dash-card">
+          <h3>Team / Interns</h3>
+          <p>Add, edit, or remove team members.</p>
         </a>
-        <a href="publications.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
-          <h3 style="color:var(--color-navy);">Publications</h3>
-          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Manage the lab's publication list.</p>
+        <a href="publications.html" class="dash-card">
+          <h3>Publications</h3>
+          <p>Manage the lab's publication list.</p>
         </a>
-        <a href="research.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
-          <h3 style="color:var(--color-navy);">Research Areas</h3>
-          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Update research focus cards.</p>
+        <a href="research.html" class="dash-card">
+          <h3>Research Areas</h3>
+          <p>Update research focus cards.</p>
         </a>
-        <a href="gallery.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
-          <h3 style="color:var(--color-navy);">Gallery</h3>
-          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Manage lab photos.</p>
+        <a href="projects.html" class="dash-card">
+          <h3>Projects</h3>
+          <p>Manage lab projects and demos.</p>
         </a>
-        <a href="settings.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
-          <h3 style="color:var(--color-navy);">Lab Settings</h3>
-          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Edit lab name, mission, PI info, contact.</p>
+        <a href="gallery.html" class="dash-card">
+          <h3>Gallery</h3>
+          <p>Manage lab photos.</p>
+        </a>
+        <a href="settings.html" class="dash-card">
+          <h3>Lab Settings</h3>
+          <p>Edit lab name, mission, PI info, contact.</p>
         </a>
       </div>
     </main>
   </div>
   <script src="js/auth.js"></script>
+  <script src="js/store.js"></script>
   <script src="js/include.js"></script>
+  <script>
+    // Load live stats after store.js is available
+    document.addEventListener('adminIncludesLoaded', loadDashStats);
+    // Also try immediately in case event already fired
+    if (typeof getAll === 'function') loadDashStats();
+
+    async function loadDashStats() {
+      try {
+        const [team, pubs, research, projects, gallery] = await Promise.all([
+          getAll('team'), getAll('publications'), getAll('research'),
+          getAll('projects'), getAll('gallery')
+        ]);
+        document.getElementById('statTeam').textContent = team.length;
+        document.getElementById('statPubs').textContent = pubs.length;
+        document.getElementById('statResearch').textContent = research.length;
+        document.getElementById('statProjects').textContent = projects.length;
+        document.getElementById('statGallery').textContent = gallery.length;
+      } catch(e) { console.error('Dashboard stats error:', e); }
+    }
+  </script>
 </body>
 </html>

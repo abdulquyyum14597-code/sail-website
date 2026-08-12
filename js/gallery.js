@@ -6,13 +6,23 @@ document.addEventListener('includesLoaded', async () => {
       container.innerHTML = `<p class="empty-text">No photos added yet.</p>`;
       return;
     }
-    container.innerHTML = photos.map(photo => `
-      <div class="card" style="padding:0;overflow:hidden;">
+    window.cachedGallery = photos;
+    container.innerHTML = photos.map((photo, i) => `
+      <div class="card" style="padding:0;overflow:hidden;cursor:pointer;" onclick="showGalleryModal(${i})">
         <img src="${photo.image}" alt="${photo.caption}" onerror="this.src='assets/images/placeholder-lab.jpg'" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
-        ${photo.caption ? `<p style="padding:14px 16px;color:var(--color-muted);font-size:0.88rem;">${photo.caption}</p>` : ''}
       </div>
     `).join('');
   } catch (err) {
     container.innerHTML = `<p class="empty-text">Failed to load gallery.</p>`;
   }
 });
+
+window.showGalleryModal = function(index) {
+  const photo = window.cachedGallery[index];
+  if(!photo) return;
+  const html = `
+    <img src="${photo.image}" onerror="this.src='assets/images/placeholder-lab.jpg'" style="width:100%; border-radius:6px; margin-bottom:12px;"/>
+    ${photo.caption ? `<p style="font-size:1.05rem; margin-top:16px;">${photo.caption}</p>` : ''}
+  `;
+  window.openPublicModal(html);
+};

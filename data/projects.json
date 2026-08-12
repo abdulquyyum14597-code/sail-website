@@ -1,0 +1,16 @@
+[
+  {
+    "id": "p12345",
+    "title": "Smart AI Healthcare Navigation",
+    "description": "An AI-powered indoor navigation system for hospitals.",
+    "details": "This project integrates computer vision and advanced pathfinding algorithms to assist visually impaired patients in navigating complex hospital environments independently. We partnered with local health organizations to deploy a pilot test.",
+    "status": "Active",
+    "techStack": "Python, PyTorch, React Native",
+    "dates": "Jan 2024 - Present",
+    "team": "M. K. Shahzad, A. Rahman",
+    "repoUrl": "https://github.com/saillab/healthnav",
+    "demoUrl": "https://healthnav.saillab.org",
+    "pubUrl": "https://arxiv.org/abs/1234.5678",
+    "image": ""
+  }
+]

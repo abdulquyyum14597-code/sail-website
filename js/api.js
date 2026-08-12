@@ -41,7 +41,7 @@ async function getPublications() {
 
 /**
  * Research areas
- * GET /api/research -> [{ id, title, description, icon }]
+ * GET /api/research -> [{ id, title, description }]
  */
 async function getResearchAreas() {
   const res = await fetch(`${API_BASE}data/research.json`);
@@ -56,6 +56,16 @@ async function getResearchAreas() {
 async function getGallery() {
   const res = await fetch(`${API_BASE}data/gallery.json`);
   if (!res.ok) throw new Error('Failed to fetch gallery data');
+  return res.json();
+}
+
+/**
+ * Projects
+ * GET /api/projects -> [{ id, title, description, details, status, techStack, repoUrl, demoUrl, image }]
+ */
+async function getProjects() {
+  const res = await fetch(`${API_BASE}data/projects.json?_t=${Date.now()}`);
+  if (!res.ok) throw new Error('Failed to fetch projects data');
   return res.json();
 }
 

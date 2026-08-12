@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SAIL — Smart AI Lab | SEECS, NUST</title>
   <link rel="stylesheet" href="css/style.css" />
+<script src="js/theme.js"></script>
 </head>
 <body data-page="home">
 
   <div data-include="header"></div>
 
-  <section class="hero">
-    <h1 id="heroTitle">SAIL — Smart AI Lab</h1>
-    <p id="heroTagline">Advancing intelligent systems through applied AI research at SEECS, NUST.</p>
-    <a href="research.html" class="btn btn-primary">Explore Our Research</a>
-    <a href="team.html" class="btn btn-outline" style="margin-left:12px;">Meet the Team</a>
+  <section class="hero hero-animated">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 id="heroTitle">SAIL — Smart AI Lab</h1>
+      <p id="heroTagline">Advancing intelligent systems through applied AI research at SEECS, NUST.</p>
+      <a href="research.html" class="btn btn-primary">Explore Our Research</a>
+      <a href="team.html" class="btn btn-outline" style="margin-left:12px;">Meet the Team</a>
+    </div>
   </section>
 
   <section class="section">
@@ -52,5 +57,6 @@
   <script src="js/api.js"></script>
   <script src="js/main.js"></script>
   <script src="js/home.js"></script>
+  <script src="js/hero-canvas.js"></script>
 </body>
 </html>

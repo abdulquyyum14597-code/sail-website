@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Publications — SAIL Admin</title>
   <link rel="stylesheet" href="css/admin.css" />
+<script src="../js/theme.js"></script>
 </head>
 <body data-page="publications">
   <div class="admin-layout">
@@ -42,19 +43,19 @@
       <form id="pubForm">
         <input type="hidden" id="pubId" />
         <div class="field">
-          <label>Title</label>
+          <label>Title <span class="required">*</span></label>
           <input type="text" id="pubTitle" required />
         </div>
         <div class="field">
-          <label>Authors</label>
+          <label>Authors <span class="required">*</span></label>
           <input type="text" id="pubAuthors" placeholder="e.g. M. K. Shahzad, et al." required />
         </div>
         <div class="field">
-          <label>Venue (Conference / Journal)</label>
+          <label>Venue <span class="required">*</span></label>
           <input type="text" id="pubVenue" required />
         </div>
         <div class="field">
-          <label>Year</label>
+          <label>Year <span class="required">*</span></label>
           <input type="number" id="pubYear" required />
         </div>
         <div class="field">
