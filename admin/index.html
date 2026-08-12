@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — SAIL Admin</title>
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="dashboard">
+  <div class="admin-layout">
+    <div data-include="sidebar"></div>
+    <main class="main-content">
+      <div class="page-header"><h1>Dashboard</h1></div>
+      <div class="notice-banner">
+        This admin panel currently saves changes in your browser (no live backend yet). Use the "Export JSON" button on each page after editing, then send the file to your backend developer or replace it in <code>/data/</code>.
+      </div>
+      <div class="card-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
+        <a href="team.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
+          <h3 style="color:var(--color-navy);">Team / Interns</h3>
+          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Add, edit, or remove team members.</p>
+        </a>
+        <a href="publications.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
+          <h3 style="color:var(--color-navy);">Publications</h3>
+          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Manage the lab's publication list.</p>
+        </a>
+        <a href="research.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
+          <h3 style="color:var(--color-navy);">Research Areas</h3>
+          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Update research focus cards.</p>
+        </a>
+        <a href="gallery.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
+          <h3 style="color:var(--color-navy);">Gallery</h3>
+          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Manage lab photos.</p>
+        </a>
+        <a href="settings.html" style="background:#fff;border-radius:10px;padding:24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
+          <h3 style="color:var(--color-navy);">Lab Settings</h3>
+          <p style="color:var(--color-muted);font-size:0.88rem;margin-top:6px;">Edit lab name, mission, PI info, contact.</p>
+        </a>
+      </div>
+    </main>
+  </div>
+  <script src="js/auth.js"></script>
+  <script src="js/include.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab Settings — SAIL Admin</title>
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="settings">
+  <div class="admin-layout">
+    <div data-include="sidebar"></div>
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Lab Settings</h1>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-secondary" onclick="exportSettings()">Export JSON</button>
+        </div>
+      </div>
+
+      <div class="notice-banner">Changes here save automatically to your browser as you click "Save Changes" below. Export the JSON and send it to your backend developer, or replace <code>/data/settings.json</code> yourself.</div>
+
+      <form id="settingsForm" style="background:#fff;padding:28px 30px;border-radius:10px;max-width:640px;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
+
+        <h3 style="margin-bottom:14px;color:var(--color-navy);">Lab Info</h3>
+        <div class="field">
+          <label>Lab Name</label>
+          <input type="text" id="sLabName" required />
+        </div>
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" id="sFullName" />
+        </div>
+        <div class="field">
+          <label>Affiliation</label>
+          <input type="text" id="sAffiliation" />
+        </div>
+        <div class="field">
+          <label>Tagline (shown on homepage hero)</label>
+          <input type="text" id="sTagline" />
+        </div>
+        <div class="field">
+          <label>Mission Statement</label>
+          <textarea id="sMission" rows="4"></textarea>
+        </div>
+
+        <h3 style="margin:24px 0 14px;color:var(--color-navy);">Principal Investigator</h3>
+        <div class="field">
+          <label>Name</label>
+          <input type="text" id="sPiName" />
+        </div>
+        <div class="field">
+          <label>Title</label>
+          <input type="text" id="sPiTitle" />
+        </div>
+        <div class="field">
+          <label>Photo URL / Path</label>
+          <input type="text" id="sPiPhoto" placeholder="assets/images/pi-placeholder.jpg" />
+        </div>
+        <div class="field">
+          <label>Bio</label>
+          <textarea id="sPiBio" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="sPiEmail" />
+        </div>
+
+        <h3 style="margin:24px 0 14px;color:var(--color-navy);">Contact Info</h3>
+        <div class="field">
+          <label>Address</label>
+          <input type="text" id="sAddress" />
+        </div>
+        <div class="field">
+          <label>Contact Email</label>
+          <input type="email" id="sContactEmail" />
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input type="text" id="sPhone" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:10px;">Save Changes</button>
+        <span id="saveStatus" style="color:var(--color-teal);font-size:0.85rem;margin-left:12px;display:none;">Saved!</span>
+      </form>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/include.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>

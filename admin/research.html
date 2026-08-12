@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Areas — SAIL Admin</title>
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="research">
+  <div class="admin-layout">
+    <div data-include="sidebar"></div>
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Research Areas</h1>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-secondary" onclick="exportCollection('research')">Export JSON</button>
+          <button class="btn btn-primary" onclick="openAddModal()">+ Add Research Area</button>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Icon</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="researchTableBody">
+          <tr><td colspan="4">Loading...</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <h2 id="modalTitle">Add Research Area</h2>
+      <form id="researchForm">
+        <input type="hidden" id="rId" />
+        <div class="field">
+          <label>Title</label>
+          <input type="text" id="rTitle" required />
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea id="rDescription" rows="3" required></textarea>
+        </div>
+        <div class="field">
+          <label>Icon (emoji, e.g. 🤖)</label>
+          <input type="text" id="rIcon" placeholder="🤖" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/include.js"></script>
+  <script src="js/research.js"></script>
+</body>
+</html>

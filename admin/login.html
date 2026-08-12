@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — SAIL</title>
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-box">
+      <h1>SAIL Admin Panel</h1>
+      <p class="sub">Sign in to manage lab content.</p>
+      <div class="error-msg" id="errorMsg">Incorrect password. Please try again.</div>
+      <form id="loginForm">
+        <div class="field">
+          <label for="password">Admin Password</label>
+          <input type="password" id="password" placeholder="Enter password" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+      </form>
+      <p style="margin-top:16px;font-size:0.8rem;color:var(--color-muted);">
+        <a href="../index.html">&larr; Back to website</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+      if (doLogin(password)) {
+        window.location.href = 'index.html';
+      } else {
+        document.getElementById('errorMsg').style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
