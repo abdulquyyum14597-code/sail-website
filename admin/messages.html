@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Messages — SAIL Admin</title>
+  <link rel="stylesheet" href="css/admin.css" />
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="messages">
+  <div class="admin-layout">
+    <div data-include="sidebar"></div>
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Contact Inquiries</h1>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="msgTableBody">
+          <tr><td colspan="6">Loading messages...</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <!-- Message Detail Modal -->
+  <div class="modal-overlay" id="msgModalOverlay">
+    <div class="modal-box">
+      <h2 id="msgModalSender">Message Details</h2>
+      <div style="margin-bottom:12px;font-size:0.9rem;color:var(--color-muted);" id="msgModalMeta"></div>
+      <div style="background:#f8f9fa;padding:16px;border-radius:8px;border:1px solid #e9ecef;line-height:1.6;white-space:pre-wrap;margin-bottom:20px;font-size:0.95rem;color:#333;" id="msgModalContent"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeMsgModal()">Close</button>
+        <a id="msgModalReply" href="#" class="btn btn-primary" style="text-decoration:none;">Reply via Email</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/include.js"></script>
+  <script src="js/messages.js"></script>
+</body>
+</html>

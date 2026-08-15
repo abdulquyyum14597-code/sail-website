@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="notice-banner">Changes here save automatically to your browser as you click "Save Changes" below. Export the JSON and send it to your backend developer, or replace <code>/data/settings.json</code> yourself.</div>
+      <div class="notice-banner">Changes made here are saved directly to the database and update the live website immediately upon saving.</div>
 
       <form id="settingsForm" style="background:#fff;padding:28px 30px;border-radius:10px;max-width:640px;box-shadow:0 2px 8px rgba(11,31,58,0.05);">
 
@@ -55,7 +55,13 @@
         </div>
         <div class="field">
           <label>Photo URL / Path</label>
-          <input type="text" id="sPiPhoto" placeholder="assets/images/pi-placeholder.jpg" />
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" id="sPiPhoto" placeholder="assets/images/pi-placeholder.jpg" style="flex:1;" />
+            <label class="btn btn-secondary" style="margin:0;cursor:pointer;white-space:nowrap;padding:8px 12px;font-size:0.85rem;">
+              Upload
+              <input type="file" accept="image/*" style="display:none;" onchange="handleImageUpload(this, 'sPiPhoto')" />
+            </label>
+          </div>
         </div>
         <div class="field">
           <label>Bio</label>

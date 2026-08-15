@@ -1,66 +1,80 @@
 /* ============================================================
-   store.js — Admin data layer.
-
-   RIGHT NOW (no backend yet): all CRUD operations read/write to
-   the browser's localStorage, seeded from the public site's
-   /data/*.json files on first run. This lets you build and test
-   the FULL admin experience (add/edit/delete) without a backend.
-
-   Each collection also has an "Export JSON" button in its page —
-   use that to download the updated file and replace the one in
-   /data/, which is what the public site actually reads from.
-
-   LATER (once backend exists): each function's body just needs
-   to call the real API (fetch POST/PUT/DELETE to his endpoints)
-   instead of touching localStorage. The function names and
-   signatures below are exactly what the rest of the admin UI
-   calls — keep them the same so nothing else has to change.
+   store.js — Admin data layer connected to the real REST API.
    ============================================================ */
 
-const COLLECTIONS = ['team', 'publications', 'research', 'gallery', 'projects'];
+const API_BASE_URL = (window.__BASE_PATH__ || '').replace(/\/$/, '');
 
-async function seedIfEmpty(collection) {
-  const existing = localStorage.getItem(`sail_${collection}`);
-  if (existing) return;
-  const res = await fetch(`../data/${collection}.json`);
-  const data = await res.json();
-  localStorage.setItem(`sail_${collection}`, JSON.stringify(data));
+function storeApiUrl(endpoint) {
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  return API_BASE_URL ? `${API_BASE_URL}${cleanEndpoint}` : cleanEndpoint;
 }
 
+/**
+ * Fetch all items in a collection from the REST API
+ */
 async function getAll(collection) {
-  await seedIfEmpty(collection);
-  return JSON.parse(localStorage.getItem(`sail_${collection}`) || '[]');
+  const res = await fetch(storeApiUrl(`/api/${collection}`));
+  if (!res.ok) {
+    throw new Error(`Failed to fetch ${collection}: ${res.statusText}`);
+  }
+  return await res.json();
 }
 
-async function saveAll(collection, items) {
-  localStorage.setItem(`sail_${collection}`, JSON.stringify(items));
-}
-
+/**
+ * Add a new item to a collection
+ */
 async function addItem(collection, item) {
-  const items = await getAll(collection);
-  item.id = `${collection[0]}${Date.now()}`;
-  items.push(item);
-  await saveAll(collection, items);
-  return item;
+  const res = await fetch(storeApiUrl(`/api/${collection}`), {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(item),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || `Failed to add ${collection} item`);
+  }
+  return await res.json();
 }
 
+/**
+ * Update an existing item in a collection
+ */
 async function updateItem(collection, id, updates) {
-  const items = await getAll(collection);
-  const idx = items.findIndex(i => i.id === id);
-  if (idx === -1) throw new Error('Item not found');
-  items[idx] = { ...items[idx], ...updates };
-  await saveAll(collection, items);
-  return items[idx];
+  const res = await fetch(storeApiUrl(`/api/${collection}/${id}`), {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(updates),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || `Failed to update ${collection} item`);
+  }
+  return await res.json();
 }
 
+/**
+ * Delete an item from a collection
+ */
 async function deleteItem(collection, id) {
-  const items = await getAll(collection);
-  const filtered = items.filter(i => i.id !== id);
-  await saveAll(collection, filtered);
+  const res = await fetch(storeApiUrl(`/api/${collection}/${id}`), {
+    method: 'DELETE',
+    headers: getAuthHeaders(),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || `Failed to delete ${collection} item`);
+  }
+  return await res.json();
 }
 
+/**
+ * Export collection as a JSON file
+ */
 function exportCollection(collection) {
-  getAll(collection).then(items => {
+  getAll(collection).then((items) => {
     const blob = new Blob([JSON.stringify(items, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -71,22 +85,34 @@ function exportCollection(collection) {
   });
 }
 
-/* Settings is a single object, not a list — handled separately */
+/* ============================================================
+   Settings (single object)
+   ============================================================ */
+
 async function getSettingsData() {
-  const existing = localStorage.getItem('sail_settings');
-  if (existing) return JSON.parse(existing);
-  const res = await fetch('../data/settings.json');
-  const data = await res.json();
-  localStorage.setItem('sail_settings', JSON.stringify(data));
-  return data;
+  const res = await fetch(storeApiUrl('/api/settings'));
+  if (!res.ok) {
+    throw new Error(`Failed to fetch settings: ${res.statusText}`);
+  }
+  return await res.json();
 }
 
 async function saveSettingsData(data) {
-  localStorage.setItem('sail_settings', JSON.stringify(data));
+  const res = await fetch(storeApiUrl('/api/settings'), {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || 'Failed to save settings');
+  }
+  return await res.json();
 }
 
 function exportSettings() {
-  getSettingsData().then(data => {
+  getSettingsData().then((data) => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -95,4 +121,85 @@ function exportSettings() {
     a.click();
     URL.revokeObjectURL(url);
   });
+}
+
+/* ============================================================
+   Contact Messages (Admin)
+   ============================================================ */
+
+async function getMessages() {
+  const res = await fetch(storeApiUrl('/api/contact/messages'), {
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error('Failed to fetch contact messages');
+  }
+  return await res.json();
+}
+
+async function markMessageRead(id) {
+  const res = await fetch(storeApiUrl(`/api/contact/messages/${id}/read`), {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) throw new Error('Failed to update message');
+  return await res.json();
+}
+
+async function deleteMessage(id) {
+  const res = await fetch(storeApiUrl(`/api/contact/messages/${id}`), {
+    method: 'DELETE',
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) throw new Error('Failed to delete message');
+  return await res.json();
+}
+
+/* ============================================================
+   File Upload Helper
+   ============================================================ */
+
+async function uploadFile(file) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const token = getToken();
+  const headers = {};
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(storeApiUrl('/api/upload'), {
+    method: 'POST',
+    headers,
+    body: formData,
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || 'Failed to upload image');
+  }
+  return data; // { success: true, url: 'uploads/filename.jpg' }
+}
+
+/**
+ * Global helper for file input upload binding
+ */
+async function handleImageUpload(inputEl, targetInputId) {
+  if (!inputEl.files || !inputEl.files[0]) return;
+  const file = inputEl.files[0];
+  const target = document.getElementById(targetInputId);
+  const originalValue = target.value;
+  target.value = 'Uploading image...';
+  target.disabled = true;
+
+  try {
+    const res = await uploadFile(file);
+    target.value = res.url;
+  } catch (err) {
+    alert('Upload failed: ' + err.message);
+    target.value = originalValue;
+  } finally {
+    target.disabled = false;
+  }
 }
