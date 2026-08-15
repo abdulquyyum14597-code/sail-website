@@ -43,8 +43,9 @@
             <label style="display:block;font-size:0.85rem;font-weight:600;margin-bottom:6px;">Message</label>
             <textarea id="cfMessage" rows="5" required style="width:100%;padding:10px 12px;border:1px solid var(--color-border);border-radius:8px;font-family:inherit;"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Send Message</button>
-          <p id="cfStatus" style="margin-top:12px;color:var(--color-teal);display:none;">Message sent (placeholder — no backend yet).</p>
+          <button type="submit" id="cfSubmitBtn" class="btn btn-primary">Send Message</button>
+          <p id="cfStatus" style="margin-top:12px;color:var(--color-teal);display:none;font-weight:600;">&check; Thank you! Your message has been sent successfully.</p>
+          <p id="cfError" style="margin-top:12px;color:#dc2626;display:none;font-weight:600;"></p>
         </form>
       </div>
     </div>

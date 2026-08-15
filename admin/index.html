@@ -12,8 +12,8 @@
     <div data-include="sidebar"></div>
     <main class="main-content">
       <div class="page-header"><h1>Dashboard</h1></div>
-      <div class="notice-banner">
-        This admin panel currently saves changes in your browser (no live backend yet). Use the "Export JSON" button on each page after editing, then send the file to your backend developer or replace it in <code>/data/</code>.
+      <div class="notice-banner" style="background:#f0fdf4;border-color:#bbf7d0;color:#166534;">
+        &check; Connected to live REST API &amp; Database. All content changes and file uploads sync immediately to the live site.
       </div>
 
       <!-- Live Stats -->
@@ -38,6 +38,10 @@
           <span class="stat-count" id="statGallery">—</span>
           <span class="stat-label">Gallery Photos</span>
         </div>
+        <div class="stat-card">
+          <span class="stat-count" id="statMessages">—</span>
+          <span class="stat-label">Contact Messages</span>
+        </div>
       </div>
 
       <!-- Quick Actions -->
@@ -48,6 +52,7 @@
         <a href="research.html" class="quick-link">+ Add Research Area</a>
         <a href="projects.html" class="quick-link">+ Add Project</a>
         <a href="gallery.html" class="quick-link">+ Add Gallery Photo</a>
+        <a href="messages.html" class="quick-link">View Inquiries</a>
       </div>
 
       <!-- Section Links -->
@@ -73,6 +78,10 @@
           <h3>Gallery</h3>
           <p>Manage lab photos.</p>
         </a>
+        <a href="messages.html" class="dash-card">
+          <h3>Messages</h3>
+          <p>View inquiries from the website contact form.</p>
+        </a>
         <a href="settings.html" class="dash-card">
           <h3>Lab Settings</h3>
           <p>Edit lab name, mission, PI info, contact.</p>
@@ -91,15 +100,20 @@
 
     async function loadDashStats() {
       try {
-        const [team, pubs, research, projects, gallery] = await Promise.all([
-          getAll('team'), getAll('publications'), getAll('research'),
-          getAll('projects'), getAll('gallery')
+        const [team, pubs, research, projects, gallery, messages] = await Promise.all([
+          getAll('team').catch(() => []),
+          getAll('publications').catch(() => []),
+          getAll('research').catch(() => []),
+          getAll('projects').catch(() => []),
+          getAll('gallery').catch(() => []),
+          getMessages().catch(() => [])
         ]);
         document.getElementById('statTeam').textContent = team.length;
         document.getElementById('statPubs').textContent = pubs.length;
         document.getElementById('statResearch').textContent = research.length;
         document.getElementById('statProjects').textContent = projects.length;
         document.getElementById('statGallery').textContent = gallery.length;
+        document.getElementById('statMessages').textContent = messages.length;
       } catch(e) { console.error('Dashboard stats error:', e); }
     }
   </script>

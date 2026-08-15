@@ -1,10 +1,14 @@
 node_modules/
 .env
+data/sail.db
+data/*.db
+data/*.db-journal
+uploads/*
+!uploads/.gitkeep
 .DS_Store
 /dist
 /build
 *.log
 .vscode/
-# Editor directories
 __pycache__/
 *.pyc

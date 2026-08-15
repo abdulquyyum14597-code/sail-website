@@ -41,7 +41,13 @@
         <input type="hidden" id="gId" />
         <div class="field">
           <label>Image URL / Path <span class="required">*</span></label>
-          <input type="text" id="gImage" placeholder="assets/images/placeholder-lab.jpg" required />
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" id="gImage" placeholder="assets/images/placeholder-lab.jpg" required style="flex:1;" />
+            <label class="btn btn-secondary" style="margin:0;cursor:pointer;white-space:nowrap;padding:8px 12px;font-size:0.85rem;">
+              Upload
+              <input type="file" accept="image/*" style="display:none;" onchange="handleImageUpload(this, 'gImage')" />
+            </label>
+          </div>
         </div>
         <div class="field">
           <label>Caption</label>
